@@ -24,3 +24,9 @@ prop_maxFour :: Int -> Int -> Int -> Int -> Bool
 prop_maxFour a b c d =
     maxFourA a b c d == maxFourB a b c d &&
     maxFourB a b c d == maxFourC a b c d
+
+-------------------------------------------------------------------------------
+-- Exercise 4.2
+-------------------------------------------------------------------------------
+
+-- Implementation of between had to be done in Chapter4.hs

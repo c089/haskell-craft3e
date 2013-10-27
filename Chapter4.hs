@@ -58,7 +58,7 @@ between ::  MyNum -> MyNum -> MyNum -> Bool
 -- dummy definition 
 -- for you to complete!
 
-between = between
+between m n p = (n >= m && n <= p) || (n <= m && n >= p)
 
 
 -- NOTE
