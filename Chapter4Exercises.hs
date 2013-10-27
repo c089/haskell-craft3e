@@ -13,7 +13,7 @@ maxFourA a b c d
 
 -- Using max only
 maxFourB :: Int -> Int -> Int -> Int -> Int
-maxFourB a b c d = (max (max (max a b) c) d)
+maxFourB a b c d = max (max a b) (max c d)
 
 -- Using maxThree and max
 maxFourC :: Int -> Int -> Int -> Int -> Int
