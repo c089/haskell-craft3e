@@ -1,26 +1,32 @@
-import Chapter4
+import Chapter4 hiding (maxThree)
 import Test.QuickCheck
 
 -------------------------------------------------------------------------------
 -- Exercise 4.1
 -------------------------------------------------------------------------------
 
+-- Copied from Chapter4.hs to allow using Integer
+maxThree :: Integer -> Integer -> Integer -> Integer
+maxThree x y z = (x `max` y) `max` z
+
 -- Using maxThree, but not max
-maxFourA :: Int -> Int -> Int -> Int -> Int
+maxFourA :: Integer -> Integer -> Integer -> Integer -> Integer
 maxFourA a b c d
     | (maxThree a b c) >= d   = maxThree a b c
     | otherwise               = d
 
 -- Using max only
-maxFourB :: Int -> Int -> Int -> Int -> Int
+maxFourB :: Integer -> Integer -> Integer -> Integer -> Integer
 maxFourB a b c d = max (max a b) (max c d)
 
 -- Using maxThree and max
-maxFourC :: Int -> Int -> Int -> Int -> Int
+maxFourC :: Integer -> Integer -> Integer -> Integer -> Integer
 maxFourC a b c d = (maxThree a b c) `max` d
 
+maxFour = maxFourC
+
 -- All three should yield the same result
-prop_maxFour :: Int -> Int -> Int -> Int -> Bool
+prop_maxFour :: Integer -> Integer -> Integer -> Integer -> Bool
 prop_maxFour a b c d =
     maxFourA a b c d == maxFourB a b c d &&
     maxFourB a b c d == maxFourC a b c d
