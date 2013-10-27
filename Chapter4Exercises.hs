@@ -48,3 +48,14 @@ howManyEqual a b c
     | a == c           = 2
     | b == c           = 2
     | otherwise        = 0
+
+-------------------------------------------------------------------------------
+-- Exercise 4.4
+-------------------------------------------------------------------------------
+howManyOfFourEqual :: Integer -> Integer -> Integer -> Integer -> Integer
+howManyOfFourEqual a b c d
+    | a == b && b == c && c == d    = 4
+    | otherwise                     = maxFour (howManyEqual a b c)
+                                              (howManyEqual a b d)
+                                              (howManyEqual a c d)
+                                              (howManyEqual b c d)
