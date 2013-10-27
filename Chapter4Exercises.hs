@@ -30,3 +30,15 @@ prop_maxFour a b c d =
 -------------------------------------------------------------------------------
 
 -- Implementation of between had to be done in Chapter4.hs
+
+-------------------------------------------------------------------------------
+-- Exercise 4.3
+-------------------------------------------------------------------------------
+
+howManyEqual :: Integer -> Integer -> Integer -> Integer
+howManyEqual a b c
+    | a == b && b == c = 3
+    | a == b           = 2
+    | a == c           = 2
+    | b == c           = 2
+    | otherwise        = 0
