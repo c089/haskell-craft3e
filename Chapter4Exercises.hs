@@ -77,3 +77,19 @@ triArea'' a b c
                                           satisfyTriangleInequality b a c &&
                                           satisfyTriangleInequality c a b
       satisfyTriangleInequality a b c   = a < (b + c)
+
+-------------------------------------------------------------------------------
+-- Exercise 4.9
+-------------------------------------------------------------------------------
+
+maxThreeOccurs :: Integer -> Integer -> Integer -> (Integer, Integer)
+maxThreeOccurs a b c = (maxValue, occurences)
+    where
+      maxValue      = maxThree a b c
+      occurences    = occurrencesOf maxValue
+      occurrencesOf n
+        | a == n && b == n && c == n   = 3
+        | a == n && b == n             = 2
+        | a == n && c == n             = 2
+        | b == n && c == n             = 2
+        | otherwise                    = 1
