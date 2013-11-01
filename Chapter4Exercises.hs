@@ -120,3 +120,17 @@ testRPS = TestList [
  ]
 
 propCannotBeatAndLoseAgainstTheSame a = beat a /= lose a
+
+
+-------------------------------------------------------------------------------
+-- Exercise 4.15
+-------------------------------------------------------------------------------
+
+data Temp = Cold | Hot deriving (Eq, Show, Ord)
+data Season = Spring | Summer | Autumn | Winter
+
+temperatureIn :: Season -> Temp
+temperatureIn Spring = Cold
+temperatureIn Summer = Hot
+temperatureIn Autumn = Cold
+temperatureIn Winter = Cold
