@@ -123,14 +123,25 @@ propCannotBeatAndLoseAgainstTheSame a = beat a /= lose a
 
 
 -------------------------------------------------------------------------------
--- Exercise 4.15
+-- Exercise 4.15, 4.16
 -------------------------------------------------------------------------------
 
 data Temp = Cold | Hot deriving (Eq, Show, Ord)
-data Season = Spring | Summer | Autumn | Winter
+data Season = Spring | Summer | Autumn | Winter deriving (Eq, Show, Ord)
 
 temperatureIn :: Season -> Temp
 temperatureIn Spring = Cold
 temperatureIn Summer = Hot
 temperatureIn Autumn = Cold
 temperatureIn Winter = Cold
+
+data Month = January | February | March | April | May | June |
+             July | August | September | October | November| December 
+     deriving (Show, Eq, Ord)
+
+seasonIn :: Month -> Season
+seasonIn month
+    | month <= March        = Spring
+    | month <= August       = Summer
+    | month <= September    = Autumn
+    | otherwise             = Winter
