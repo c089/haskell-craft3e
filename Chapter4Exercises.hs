@@ -1,5 +1,6 @@
 import Chapter4 hiding (maxThree)
-import Test.QuickCheck
+import Test.HUnit
+import Test.QuickCheck hiding (Result)
 
 -------------------------------------------------------------------------------
 -- Exercise 4.1
@@ -93,3 +94,29 @@ maxThreeOccurs a b c = (maxValue, occurences)
         | a == n && c == n             = 2
         | b == n && c == n             = 2
         | otherwise                    = 1
+
+-------------------------------------------------------------------------------
+-- Exercise 4.11, 4.12, 4.13
+-------------------------------------------------------------------------------
+
+data Result = Win | Lose | Draw deriving (Show, Eq)
+
+outcome :: Move -> Move -> Result
+outcome a b
+    | a == beat b   = Win
+    | a == lose b   = Lose
+    | otherwise     = Draw
+
+testRPS = TestList [
+    TestCase (assertEqual "rock beats scissors"  Win (outcome Rock Scissors)),
+    TestCase (assertEqual "paper beats rock"  Win (outcome Paper Rock)),
+    TestCase (assertEqual "scissors beats paper"  Win (outcome Scissors Paper)),
+    TestCase (assertEqual "scissors loses to rock" Lose (outcome Scissors Rock)),
+    TestCase (assertEqual "rock loses to paper" Lose (outcome Rock Paper)),
+    TestCase (assertEqual "paper loses to scissors" Lose (outcome Paper Scissors)),
+    TestCase (assertEqual "draw Scissors" Draw (outcome Scissors Scissors)),
+    TestCase (assertEqual "draw Paper" Draw (outcome Paper Paper)),
+    TestCase (assertEqual "draw Rock" Draw (outcome Rock Rock))
+ ]
+
+propCannotBeatAndLoseAgainstTheSame a = beat a /= lose a
