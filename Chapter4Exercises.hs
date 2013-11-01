@@ -59,3 +59,21 @@ howManyOfFourEqual a b c d
                                               (howManyEqual a b d)
                                               (howManyEqual a c d)
                                               (howManyEqual b c d)
+
+-------------------------------------------------------------------------------
+-- Exercise 4.8
+-------------------------------------------------------------------------------
+
+triArea'' :: Float -> Float -> Float -> Float
+triArea'' a b c
+    | possible   = sqrt(s*(s-a)*(s-b)*(s-c))
+    | otherwise  = 0
+    where
+      s                                 = (a+b+c)/2
+      possible                          = allPositive &&
+                                          allSatisfyTriangleInequality
+      allPositive                       = a > 0 && b > 0 && c > 0
+      allSatisfyTriangleInequality      = satisfyTriangleInequality a b c &&
+                                          satisfyTriangleInequality b a c &&
+                                          satisfyTriangleInequality c a b
+      satisfyTriangleInequality a b c   = a < (b + c)
