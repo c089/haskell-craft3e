@@ -165,3 +165,17 @@ testRangeProduct = TestList
     , TestCase (assertEqual "for m=4,n=4" 4 (rangeProduct 4 4))
     , TestCase (assertEqual "for m=4,n=5" 20 (rangeProduct 4 5))
     ]
+
+-------------------------------------------------------------------------------
+-- Exercise 4.18
+-------------------------------------------------------------------------------
+
+fac' :: Integer -> Integer
+fac' n
+    | n < 0   = error "fac only defined on natural numbers"
+    | n == 0    = 1
+    | otherwise = rangeProduct 1 n
+
+propFac'ShouldBeSameAsFac n
+    | n >= 0    = fac n == fac' n
+    | otherwise = True
