@@ -145,3 +145,23 @@ seasonIn month
     | month <= August       = Summer
     | month <= September    = Autumn
     | otherwise             = Winter
+
+-------------------------------------------------------------------------------
+-- Exercise 4.17
+-------------------------------------------------------------------------------
+
+rangeProduct :: Integer -> Integer -> Integer
+rangeProduct m n
+    | n < m     = 0
+    | m == n    = n
+    | otherwise = (rangeProduct m (n-1)) * n
+
+testRangeProduct = TestList
+    [ TestCase (assertEqual "for m > n"  0 (rangeProduct 2 1))
+    , TestCase (assertEqual "for m=n=1"  1 (rangeProduct 1 1))
+    , TestCase (assertEqual "for m=1,n=2" 2 (rangeProduct 1 2))
+    , TestCase (assertEqual "for m=1,n=3" 6 (rangeProduct 1 3))
+    , TestCase (assertEqual "for m=1,n=4" 24 (rangeProduct 1 4))
+    , TestCase (assertEqual "for m=4,n=4" 4 (rangeProduct 4 4))
+    , TestCase (assertEqual "for m=4,n=5" 20 (rangeProduct 4 5))
+    ]
