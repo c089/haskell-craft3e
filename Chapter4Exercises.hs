@@ -179,3 +179,25 @@ fac' n
 propFac'ShouldBeSameAsFac n
     | n >= 0    = fac n == fac' n
     | otherwise = True
+
+-------------------------------------------------------------------------------
+-- Exercise 4.19
+-------------------------------------------------------------------------------
+multiplyUsingAdd a b
+    | a == 0    = 0
+    | otherwise = multiplyUsingAdd (a-1) b + b
+
+testMultiplyUsingAddition = TestList
+    [ TestCase (assertEqual "0 * 2" 0  (multiplyUsingAdd 0 2))
+    , TestCase (assertEqual "2 * 0" 0  (multiplyUsingAdd 2 0))
+    , TestCase (assertEqual "1 * 2" 2  (multiplyUsingAdd 1 2))
+    , TestCase (assertEqual "2 * 1" 2  (multiplyUsingAdd 2 1))
+    , TestCase (assertEqual "3 * 1" 3  (multiplyUsingAdd 3 1))
+    , TestCase (assertEqual "1 * 3" 3  (multiplyUsingAdd 1 3))
+    , TestCase (assertEqual "2 * 2" 4  (multiplyUsingAdd 2 2))
+    , TestCase (assertEqual "7 * 9" 63 (multiplyUsingAdd 7 9))
+    ]
+
+propMultiplyUsingAddShouldEqualMul a b
+    | a >= 0 && b >= 0  = multiplyUsingAdd a b == a * b
+    | otherwise         = True
