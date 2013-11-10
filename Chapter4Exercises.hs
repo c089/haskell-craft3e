@@ -318,3 +318,56 @@ prop_allEqual m n p =  allEqual m n p == allEqual' m n p
 
 -- discussion: quickCheck ftw! lots of combinations here, hard to find all
 --             failing test cases...
+
+-------------------------------------------------------------------------------
+-- Exercise 4.35 / 4.36
+-------------------------------------------------------------------------------
+
+test_allDifferent = TestList
+    -- all different
+    [ TestCase ( assertEqual "pos, pos, pos"    True  (allDifferent 1 2 3))
+    , TestCase ( assertEqual "pos, pos, 0"      True  (allDifferent 1 2 0))
+    , TestCase ( assertEqual "pos, pos, neg"    True  (allDifferent 1 2 (-1)))
+    , TestCase ( assertEqual "pos, 0, pos"      True  (allDifferent 1 0 1))
+    , TestCase ( assertEqual "pos, 0, neg"      True  (allDifferent 1 0 (-1)))
+    , TestCase ( assertEqual "pos, neg, pos"    True  (allDifferent 1 (-1) 2))
+    , TestCase ( assertEqual "pos, neg, 0"      True  (allDifferent 1 (-1) 0))
+    , TestCase ( assertEqual "pos, neg, neg"    True  (allDifferent 1 (-1) (-2)))
+
+    , TestCase ( assertEqual "0, pos, pos"      True  (allDifferent 0 1 2))
+    , TestCase ( assertEqual "0, pos, neg"      True  (allDifferent 0 1 (-1)))
+    , TestCase ( assertEqual "0, neg, pos"      True  (allDifferent 0 (-1) 1))
+    , TestCase ( assertEqual "0, neg, neg"      True  (allDifferent 0 (-1) (-2)))
+
+    , TestCase ( assertEqual "neg, pos, pos"    True  (allDifferent (-1) 1 2))
+    , TestCase ( assertEqual "neg, pos, 0"      True  (allDifferent (-1) 1 0))
+    , TestCase ( assertEqual "neg, pos, neg"    True  (allDifferent (-1) 1 (-1)))
+    , TestCase ( assertEqual "neg, 0, pos"      True  (allDifferent (-1) 0 (1)))
+    , TestCase ( assertEqual "neg, 0, neg"      True  (allDifferent (-1) (0) (-2)))
+    , TestCase ( assertEqual "neg, neg, pos"    True  (allDifferent (-1) (-2) 1))
+    , TestCase ( assertEqual "neg, neg, 0"      True  (allDifferent (-1) (-2) 0))
+    , TestCase ( assertEqual "neg, neg, neg"    True  (allDifferent (-1) (-2) (-3)))
+
+    -- two or more zeros -> can't be all different
+    , TestCase ( assertEqual "0, 0, pos"        False  (allDifferent 0 0 1))
+    , TestCase ( assertEqual "0, 0, neg"        False  (allDifferent 0 0 (-1)))
+    , TestCase ( assertEqual "pos, 0, 0"        False  (allDifferent 1 0 0))
+    , TestCase ( assertEqual "neg, 0, 0"        False  (allDifferent (-1) 0 0))
+    , TestCase ( assertEqual "0, pos, 0"        False  (allDifferent 0 1 0))
+    , TestCase ( assertEqual "0, neg, 0"        False  (allDifferent 0 (-1) 0))
+    , TestCase ( assertEqual "0, 0, 0"          False  (allDifferent 0 0 0))
+
+    -- other cases of two equal
+    , TestCase ( assertEqual "all pos, a b b"   False (allDifferent 1 2 2))
+    , TestCase ( assertEqual "all pos, a b a"   False (allDifferent 1 2 1))
+    , TestCase ( assertEqual "all pos, b b a"   False (allDifferent 2 2 1))
+    , TestCase ( assertEqual "all neg, a b b"   False (allDifferent (-1) (-2) (-2)))
+    , TestCase ( assertEqual "all neg, a b a"   False (allDifferent (-1) (-2) (-1)))
+    , TestCase ( assertEqual "all neg, b b a"   False (allDifferent (-2) (-2) (-1)))
+
+    -- there are even more but I'm a bit bored now ;)
+    ]
+
+-- attempt from book
+allDifferent :: Integer -> Integer -> Integer -> Bool
+allDifferent m n p = (m/=n) && (n/=p)
