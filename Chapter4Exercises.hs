@@ -266,3 +266,14 @@ any0 f limit
     | limit < 0     = error "not defined for limit < 0"
     | limit == 0    = f 0 == 0
     | otherwise     = f limit == 0 || (any0 f (limit-1))
+
+
+-------------------------------------------------------------------------------
+-- Exercise 4.23
+-------------------------------------------------------------------------------
+regions' :: Integer -> Integer
+regions' x = (sumFun id x) + 1
+
+prop_regionsImplementations a
+    | a >=0     = regions a == regions' a
+    | otherwise = True
