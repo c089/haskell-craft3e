@@ -277,3 +277,44 @@ regions' x = (sumFun id x) + 1
 prop_regionsImplementations a
     | a >=0     = regions a == regions' a
     | otherwise = True
+
+
+-------------------------------------------------------------------------------
+-- Exercise 4.33 / 4.34
+-------------------------------------------------------------------------------
+
+test_allEqual = TestList
+    [ TestCase (assertEqual "all equal"         True  (allEqual 1 1 1))
+    , TestCase (assertEqual "1st and 2nd eq"    False (allEqual 1 1 2))
+    , TestCase (assertEqual "1st and 3rd eq"    False (allEqual 1 2 1))
+    , TestCase (assertEqual "2nd and 3rd eq"    False (allEqual 2 1 1))
+    , TestCase (assertEqual "all different"     False (allEqual 1 2 3))
+
+    , TestCase (assertEqual "with 0 Equal"      False (allEqual 0 0 1))
+    , TestCase (assertEqual "with 0 different"  True  (allEqual 0 0 0))
+
+    , TestCase (assertEqual "all neg equal"     True   (allEqual (-1) (-1) (-1)))
+    , TestCase (assertEqual "all neg 2 diff"    False  (allEqual (-1) (-2) (-2)))
+    , TestCase (assertEqual "all neg different" False  (allEqual (-1) (-2) (-3)))
+    , TestCase (assertEqual "all neg different" False  (allEqual (-3) (-2) (-1)))
+    , TestCase (assertEqual "all neg different" False  (allEqual (-3) (-1) (-2)))
+
+    , TestCase (assertEqual "m negative"        False  (allEqual (-1) ( 1) ( 1)))
+    , TestCase (assertEqual "n negative"        False  (allEqual ( 1) (-1) (-1)))
+    , TestCase (assertEqual "p negative"        False  (allEqual ( 1) ( 1) (-1)))
+
+    , TestCase (assertEqual "neg, 0, pos"       False  (allEqual (-1) ( 0) ( 1)))
+    , TestCase (assertEqual "neg, pos, 0"       False  (allEqual (-1) ( 1) ( 0)))
+    , TestCase (assertEqual "0, pos, neg"       False  (allEqual (-1) ( 1) ( 0)))
+    , TestCase (assertEqual "0, neg, pos"       False  (allEqual ( 0) (-1) ( 1)))
+    ]
+
+-- solution from book
+allEqual m n p = ((m + n + p) == 3*p)
+
+-- different solution for a quickCheck
+allEqual' m n p = m == n && n ==p
+prop_allEqual m n p =  allEqual m n p == allEqual' m n p
+
+-- discussion: quickCheck ftw! lots of combinations here, hard to find all
+--             failing test cases...
