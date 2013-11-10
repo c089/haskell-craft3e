@@ -217,3 +217,34 @@ testIntegerSquareRoot = TestList
     , TestCase (assertEqual "15"    3 (integerSquareRoot 15))
     , TestCase (assertEqual "16"    4 (integerSquareRoot 16))
     ]
+
+
+-------------------------------------------------------------------------------
+-- Exercise 4.21
+-------------------------------------------------------------------------------
+
+f :: Integer -> Integer
+f 0 = 0
+f 1 = 44
+f 2 = 17
+f _ = 0
+
+maxOfFn:: (Integer->Integer) -> Integer -> Integer
+maxOfFn f limit
+    | limit < 0     = error "not defined for limit < 0"
+    | limit == 0    = f 0
+    | otherwise     = max (f limit) (maxOfFn f (limit-1))
+
+testMaxOfFn = TestList
+    [ TestCase (assertEqual "f 0 is always the max" 0   (maxOfFn f 0))
+    , TestCase (assertEqual "f 1 is > f 0" 44           (maxOfFn f 1))
+    , TestCase (assertEqual "f 2 is < f 1" 44           (maxOfFn f 2))
+    , TestCase (assertEqual "f 1 is max"   44           (maxOfFn f 99))
+    ]
+
+prop_maxOfFn_mod limit
+    | limit < 0 = True
+    | otherwise = (maxOfFn f limit) < divisor
+    where
+        divisor = 5
+        f n = mod n divisor
