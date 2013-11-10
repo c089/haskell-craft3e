@@ -248,3 +248,21 @@ prop_maxOfFn_mod limit
     where
         divisor = 5
         f n = mod n divisor
+
+
+-------------------------------------------------------------------------------
+-- Exercise 4.22
+-------------------------------------------------------------------------------
+
+any0TestFn :: Integer -> Integer
+any0TestFn 0 = 1
+any0TestFn 1 = 99
+any0TestFn 2 = 42
+any0TestFn 3 = 0
+
+-- any of f 0 to f limit is zero
+any0 :: (Integer->Integer) -> Integer -> Bool
+any0 f limit
+    | limit < 0     = error "not defined for limit < 0"
+    | limit == 0    = f 0 == 0
+    | otherwise     = f limit == 0 || (any0 f (limit-1))
