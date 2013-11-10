@@ -201,3 +201,19 @@ testMultiplyUsingAddition = TestList
 propMultiplyUsingAddShouldEqualMul a b
     | a >= 0 && b >= 0  = multiplyUsingAdd a b == a * b
     | otherwise         = True
+
+
+-------------------------------------------------------------------------------
+-- Exercise 4.20
+-------------------------------------------------------------------------------
+integerSquareRoot :: Integer -> Integer
+integerSquareRoot n = isrInternal n n
+    where isrInternal n m
+            | n*n <= m  = n
+            | otherwise = isrInternal (n-1) m
+
+testIntegerSquareRoot = TestList
+    [ TestCase (assertEqual "4"     2 (integerSquareRoot 4))
+    , TestCase (assertEqual "15"    3 (integerSquareRoot 15))
+    , TestCase (assertEqual "16"    4 (integerSquareRoot 16))
+    ]
