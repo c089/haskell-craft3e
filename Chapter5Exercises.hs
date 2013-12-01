@@ -1,5 +1,7 @@
+module Chapter5Exercises where
 import Chapter4 hiding (maxThree)
 import Chapter4Exercises
+import Chapter5
 import Test.HUnit
 import Test.QuickCheck
 
@@ -46,3 +48,19 @@ testOrderTriple = TestList
     , TestCase (assertEqual "all same" (0,0,0) (orderTriple (0,0,0)))
     , TestCase (assertEqual "reverse order" (0,1,2) (orderTriple (2,1,0)))
     ]
+
+-------------------------------------------------------------------------------
+-- Exercise 5.5
+-------------------------------------------------------------------------------
+
+perimeter :: Shape -> Float
+perimeter (Circle r) = pi*2*r
+
+
+-------------------------------------------------------------------------------
+-- Exercise 5.6
+-------------------------------------------------------------------------------
+
+data DataItems = ShopItem' ProductName Quantity
+type ProductName = String
+type Quantity = Integer
