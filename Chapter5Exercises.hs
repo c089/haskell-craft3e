@@ -1,3 +1,4 @@
+import Chapter4 hiding (maxThree)
 import Chapter4Exercises
 import Test.HUnit
 import Test.QuickCheck
@@ -29,3 +30,19 @@ testMaxThreeOccurs' = TestList
     ]
 
 prop_maxThreeOccurs a b c = maxThreeOccurs a b c == maxThreeOccurs' a b c
+
+
+-------------------------------------------------------------------------------
+-- Exercise 5.2
+-------------------------------------------------------------------------------
+
+minThree a b c = a `min` b `min` c
+
+orderTriple :: (Integer, Integer, Integer) -> (Integer, Integer, Integer)
+orderTriple (a,b,c) = ((minThree a b c), (middleNumber a b c), (maxThree a b c))
+
+testOrderTriple = TestList
+    [ TestCase (assertEqual "already sorted" (0,1,2) (orderTriple (0,1,2)))
+    , TestCase (assertEqual "all same" (0,0,0) (orderTriple (0,0,0)))
+    , TestCase (assertEqual "reverse order" (0,1,2) (orderTriple (2,1,0)))
+    ]
