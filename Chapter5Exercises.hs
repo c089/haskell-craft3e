@@ -109,3 +109,29 @@ isLetter :: Char -> Bool
 isLetter x = capitalizeChar x `elem` "ABCDE"
 
 testCapitalizeLetters = TestCase (assertEqual "" "ABC" (capitalizeLetters "a b c"))
+
+-------------------------------------------------------------------------------
+-- Exercise 5.20
+-------------------------------------------------------------------------------
+
+divides x y = x `mod` y == 0
+divisors :: Integer -> [Integer]
+divisors x = [ y | y <- [1..x], divides x y ]
+
+testDivisors = TestList
+    [ TestCase (assertEqual "non-positive"      []              (divisors 0))
+    , TestCase (assertEqual "divisors of 12"    [1,2,3,4,6,12]  (divisors 12))
+    , TestCase (assertEqual "prime"             [1, 13]         (divisors 13))
+    ]
+
+
+isPrime :: Integer -> Bool
+isPrime n = divisors n == [1,n]
+
+testIsPrime = TestList
+    [ TestCase (assertEqual "1" False (isPrime 1))
+    , TestCase (assertEqual "2" True (isPrime 2))
+    , TestCase (assertEqual "3" True (isPrime 3))
+    , TestCase (assertEqual "4" False (isPrime 4))
+    , TestCase (assertEqual "5" True (isPrime 5))
+    ]
