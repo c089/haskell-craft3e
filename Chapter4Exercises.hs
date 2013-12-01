@@ -1,3 +1,5 @@
+module Chapter4Exercises where
+
 import Chapter4 hiding (maxThree)
 import Test.HUnit
 import Test.QuickCheck hiding (Result)
