@@ -135,3 +135,24 @@ testIsPrime = TestList
     , TestCase (assertEqual "4" False (isPrime 4))
     , TestCase (assertEqual "5" True (isPrime 5))
     ]
+
+
+-------------------------------------------------------------------------------
+-- Exercise 5.21
+-------------------------------------------------------------------------------
+
+matches :: Integer -> [Integer] -> [Integer]
+matches toMatch list = [ e | e<-list, e == toMatch ]
+
+testMatches = TestCase (assertEqual "5s" [5,5] (matches 5 [1,2,3,4,5,0,5,1] ))
+
+elem' :: Integer -> [Integer] -> Bool
+elem' element list = length (matches element list) > 0
+
+testElem' = TestList
+    [ TestCase (assertEqual "nope" False (elem' 5 [1,2,3,4]))
+    , TestCase (assertEqual "yeah" True  (elem' 5 [1,2,3,4,5]))
+    , TestCase (assertEqual "twice" True  (elem' 5 [5,5]))
+    ]
+
+prop_elem'eqelem a b = elem a b == elem' a b
