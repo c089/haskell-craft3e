@@ -191,12 +191,30 @@ testDuplicate = TestList
 -------------------------------------------------------------------------------
 
 pushRight :: String -> String
-pushRight s = padding ++ s
+pushRight s = pushRight' s 12
+
+pushRight' :: String -> Int -> String
+pushRight' s l = padding ++ s
     where padding = [ ' ' | _ <- [1..n] ]
-          n          = linelength - length s
-          linelength = 12
+          n          = l - length s
 
 testPushRight = TestList
     [ TestCase (assertEqual "single char" "           x" (pushRight "x") )
     , TestCase (assertEqual "croc" "   crocodile" (pushRight "crocodile"))
     ]
+
+
+-------------------------------------------------------------------------------
+-- Exercise 5.25
+-------------------------------------------------------------------------------
+
+twoColums :: Int -> String -> String -> String
+twoColums width left right = left ++ (pushRight' right (padding left))
+    where padding left = width - (length left)
+
+fibTable :: Integer -> String
+fibTable n = header ++ "\n" ++ onSeparateLines rows
+    where header = "n           fib n"
+          rows = [ row a b | (a,b) <- pairs  ]
+          row a b = twoColums (length header) (show a) (show b)
+          pairs = [ fibPair x | x <- [0..n] ]
