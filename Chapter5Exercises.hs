@@ -184,3 +184,19 @@ testDuplicate = TestList
     , TestCase (assertEqual "duplicated for n>1" "foofoo" (duplicate "foo" 2))
     , TestCase (assertEqual "more dupes" "ababababab" (duplicate "ab" 5))
     ]
+
+
+-------------------------------------------------------------------------------
+-- Exercise 5.24
+-------------------------------------------------------------------------------
+
+pushRight :: String -> String
+pushRight s = padding ++ s
+    where padding = [ ' ' | _ <- [1..n] ]
+          n          = linelength - length s
+          linelength = 12
+
+testPushRight = TestList
+    [ TestCase (assertEqual "single char" "           x" (pushRight "x") )
+    , TestCase (assertEqual "croc" "   crocodile" (pushRight "crocodile"))
+    ]
