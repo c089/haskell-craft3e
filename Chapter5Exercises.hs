@@ -167,3 +167,21 @@ onSeparateLines ls = [ c | l <- [ l++"\n" | l <- ls ] , c <- l ]
 testOnSeparateLines = TestCase (
     assertEqual "should concat strings with newline character"
     "foo\nbar\nbaz\n" (onSeparateLines ["foo", "bar", "baz"]))
+
+
+-------------------------------------------------------------------------------
+-- Exercise 5.23
+-------------------------------------------------------------------------------
+
+joinStrings :: [String] -> String
+joinStrings ss = [ c | s <- ss, c <- s ]
+
+duplicate :: String -> Integer -> String
+duplicate s n = joinStrings [ s | x <- [0..n-1] ]
+
+testDuplicate = TestList
+    [ TestCase (assertEqual "empty for n = 0" "" (duplicate "foo" 0))
+    , TestCase (assertEqual "string for n = 1" "foo" (duplicate "foo" 1))
+    , TestCase (assertEqual "duplicated for n>1" "foofoo" (duplicate "foo" 2))
+    , TestCase (assertEqual "more dupes" "ababababab" (duplicate "ab" 5))
+    ]
