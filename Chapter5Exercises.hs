@@ -161,20 +161,19 @@ prop_elem'eqelem a b = elem a b == elem' a b
 -- Exercise 5.22
 -------------------------------------------------------------------------------
 
+joinStrings :: [String] -> String
+joinStrings ss = [ c | s <- ss, c <- s ]
+
 onSeparateLines :: [String] -> String
-onSeparateLines ls = [ c | l <- [ l++"\n" | l <- ls ] , c <- l ]
+onSeparateLines ls = joinStrings [ l++"\n" | l <- ls  ]
 
 testOnSeparateLines = TestCase (
     assertEqual "should concat strings with newline character"
     "foo\nbar\nbaz\n" (onSeparateLines ["foo", "bar", "baz"]))
 
-
 -------------------------------------------------------------------------------
 -- Exercise 5.23
 -------------------------------------------------------------------------------
-
-joinStrings :: [String] -> String
-joinStrings ss = [ c | s <- ss, c <- s ]
 
 duplicate :: String -> Integer -> String
 duplicate s n = joinStrings [ s | x <- [0..n-1] ]
