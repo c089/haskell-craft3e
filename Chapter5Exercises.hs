@@ -156,3 +156,14 @@ testElem' = TestList
     ]
 
 prop_elem'eqelem a b = elem a b == elem' a b
+
+-------------------------------------------------------------------------------
+-- Exercise 5.22
+-------------------------------------------------------------------------------
+
+onSeparateLines :: [String] -> String
+onSeparateLines ls = [ c | l <- [ l++"\n" | l <- ls ] , c <- l ]
+
+testOnSeparateLines = TestCase (
+    assertEqual "should concat strings with newline character"
+    "foo\nbar\nbaz\n" (onSeparateLines ["foo", "bar", "baz"]))
