@@ -107,3 +107,18 @@ propOr  x = or  x == or'  x
 
 -- Again, the recursion always includes the value of and/or []. If and []
 -- returned False, the recursion could never result in True.
+
+-------------------------------------------------------------------------------
+-- Exercise 7.8
+-------------------------------------------------------------------------------
+
+elemNum :: Integer -> [Integer] -> Integer
+elemNum _ []     = 0
+elemNum a (x:xs)
+    | a == x    = 1 + elemNum a xs
+    | otherwise = elemNum a xs
+
+testElemNum = TestList
+    [ TestCase (assertEqual "" 0 (elemNum 5 []))
+    , TestCase (assertEqual "" 0 (elemNum 5 [1,2,3]))
+    ]
