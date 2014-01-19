@@ -1,6 +1,7 @@
 import Test.HUnit
 import Test.QuickCheck
 import Pictures (Picture)
+import Chapter5Exercises (onSeparateLines)
 
 -------------------------------------------------------------------------------
 -- Exercise 6.1
@@ -69,3 +70,10 @@ superimposeTest =
               expected = [ ".###",
                            ".###",
                            ".###" ]
+
+-------------------------------------------------------------------------------
+-- Exercise 6.7
+-------------------------------------------------------------------------------
+
+printPicture :: Picture -> IO ()
+printPicture picture = putStr (onSeparateLines picture)
