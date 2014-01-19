@@ -77,3 +77,21 @@ superimposeTest =
 
 printPicture :: Picture -> IO ()
 printPicture picture = putStr (onSeparateLines picture)
+
+-------------------------------------------------------------------------------
+-- Exercise 6.8
+-------------------------------------------------------------------------------
+
+rotate90 :: Picture -> Picture
+rotate90 p = [ line n p | n <- [0..((length p)-1)] ]
+    where line n p = reverse [ l!!n | l <- p]
+
+testRotate90 = TestCase (assertEqual "" expected (rotate90 input))
+    where input    = [  ".##.",
+                        ".#.#",
+                        ".###",
+                        "####" ]
+          expected = [  "#...",
+                        "####",
+                        "##.#",
+                        "###." ]
