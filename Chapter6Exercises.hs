@@ -1,5 +1,6 @@
 import Test.HUnit
 import Test.QuickCheck
+import Pictures (Picture)
 
 -------------------------------------------------------------------------------
 -- Exercise 6.1
@@ -49,3 +50,22 @@ superimposeLine a b = [ superimposeChar a b | (a,b) <- zip a b ]
 
 superimposeLineTest
     = TestCase (assertEqual "" ".###" (superimposeLine ".##." ".#.#"))
+
+-------------------------------------------------------------------------------
+-- Exercise 6.6
+-------------------------------------------------------------------------------
+
+superimpose :: Picture -> Picture -> Picture
+superimpose a b = [ superimposeLine a b | (a,b) <- zip a b  ]
+
+superimposeTest =
+    TestCase (assertEqual "" expected (superimpose a b) )
+        where a =        [ ".##.",
+                           ".##.",
+                           ".##." ]
+              b =        [ ".#.#",
+                           ".#.#",
+                           ".#.#" ]
+              expected = [ ".###",
+                           ".###",
+                           ".###" ]
