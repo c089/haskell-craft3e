@@ -1,5 +1,7 @@
 import Test.HUnit
 import Test.QuickCheck
+import Chapter5 (digits)
+import Chapter7 (firstDigit)
 
 -------------------------------------------------------------------------------
 -- Exercise 7.1
@@ -48,4 +50,17 @@ addFirst' xs
 
 propFirstPlusOne x = firstPlusOne x == firstPlusOne' x
 propAddFirst x = addFirst x == addFirst' x
+
+
+-------------------------------------------------------------------------------
+-- Exercise 7.4
+-------------------------------------------------------------------------------
+firstDigit' :: String -> Char
+firstDigit' x = first (digits x)
+    where
+        first :: String -> Char
+        first []    = '\0'
+        first (x:_) = x
+
+propFirstDigit x = firstDigit x == firstDigit' x
 
