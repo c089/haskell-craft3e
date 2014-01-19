@@ -64,3 +64,46 @@ firstDigit' x = first (digits x)
 
 propFirstDigit x = firstDigit x == firstDigit' x
 
+-------------------------------------------------------------------------------
+-- Exercise 7.5
+-------------------------------------------------------------------------------
+
+listProduct :: [Integer] -> Integer
+listProduct []      = 1
+listProduct (x:xs)  = x * listProduct xs
+
+testProduct = TestCase (assertEqual "3*4*5=60" 60 (listProduct [3,4,5]))
+
+-- 1 chosen for [] because the recursion always expands to include
+-- (listProduct []) and with a starting value of 0 that would always
+-- result in 0
+
+
+-------------------------------------------------------------------------------
+-- Exercise 7.6
+-------------------------------------------------------------------------------
+
+and', or' :: [Bool] -> Bool
+
+and' []     = True
+and' (x:xs) = x && (and xs)
+
+or' []      = False
+or' (x:xs)  = x || (or xs)
+
+testAndOr = TestList
+    [ TestCase (assertEqual "" False (and' [False, False]))
+    , TestCase (assertEqual "" False (and' [False, True]))
+    , TestCase (assertEqual "" False (and' [True, False]))
+    , TestCase (assertEqual "" True  (and' [True, True]))
+    , TestCase (assertEqual "" False (or'  [False, False]))
+    , TestCase (assertEqual "" True  (or'  [False, True]))
+    , TestCase (assertEqual "" True  (or'  [True, False]))
+    , TestCase (assertEqual "" True  (or'  [True, True]))
+    ]
+
+propAnd x = and x == and' x
+propOr  x = or  x == or'  x
+
+-- Again, the recursion always includes the value of and/or []. If and []
+-- returned False, the recursion could never result in True.
